@@ -17,13 +17,10 @@ services:
       - MONGO_PASSWORD=mongopassword
       - SESSIONS_SECRET="Spme 238ur98ubf3=8932898*&*&"
     command: npm run dev
-#   mongoapp:
-#     image: mongo
-#     environment:
-#       - MONGO_INITDB_ROOT_USERNAME=mongoadmin
-#       - MONGO_INITDB_ROOT_PASSWORD=mongopassword
-#     volumes:
-#       - mongo-db:/data/db
+  mongoapp:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=mongopassword
 
 # volumes:
 #   mongo-db:
