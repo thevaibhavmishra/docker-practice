@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   nginx:
     ports:
@@ -7,20 +7,18 @@ services:
     build: 
       context: .
       args:
-        - NODE_ENV=development
+        NODE_ENV: development
     volumes:
       - ./:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development
       - MONGO_USER=mongoadmin
-      - MONGO_PASSWORD=mongopassword
-      - SESSIONS_SECRET="Spme 238ur98ubf3=8932898*&*&"
+      - MONGO_PASSWORD=mongopass
+      - SESSION_SECRET=oHHMY238*&^&god^&^&secret
     command: npm run dev
+  
   mongoapp:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongoadmin
-      - MONGO_INITDB_ROOT_PASSWORD=mongopassword
-
-# volumes:
-#   mongo-db:
+      - MONGO_INITDB_ROOT_PASSWORD=mongopass

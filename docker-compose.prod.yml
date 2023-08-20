@@ -1,20 +1,14 @@
-version: '3'
+version: "3"
 services:
   nginx:
+    image: nginx:stable-alpine
     ports:
       - "80:80"
   node-app:
     build: 
       context: .
       args:
-        - NODE_ENV=production
+        NODE_ENV: production
     environment:
       - NODE_ENV=production
-      - MONGO_USER=${MONGO_USER}
-      - MONGO_PASSWORD=${MONGO_PASSWORD}
-      - SESSIONS_SECRET=${SESSIONS_SECRET}
-    command: node index.js
-  mongoapp:
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    command: npm start

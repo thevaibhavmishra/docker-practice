@@ -7,6 +7,7 @@ const redis = require("redis");
 const blogRouter = require("./routes/blogRoute");
 const userRouter = require("./routes/userRoute");
 const { MONGO_USER, MONGO_PASSWORD, MONGO_IP, MONGO_PORT, REDIS_IP, REDIS_PORT, SESSION_SECRET } = require("./config/config");
+// require('dotenv').config()
 
 app.use(cors());
 
@@ -14,15 +15,20 @@ let RedisStore = require("connect-redis").default ;
 
 let redisClient = redis.createClient({
     url: `redis://${REDIS_IP}:${REDIS_PORT}`
-})
+}) 
 
 
 redisClient.connect().catch(console.error)
 
 const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin` ;
+// const mongoURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.s9pzwsh.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`
+
 
 const connectWithRetry = () => {
-    mongoose.connect(mongoURL)
+    mongoose.connect(mongoURL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
         .then(() => console.log("Successfully connected to database") )
         .catch((e) => {
             console.log(e)
@@ -50,7 +56,7 @@ app.use(session({
 app.use(express.json());
 
 app.get('/api', (req, res)=>{
-    res.send("<h2>Hello, There!!!</h2>");
+    res.send("<h2>Hello, There</h2>");
     console.log("Yeah bitch it sucks");
 })
 
